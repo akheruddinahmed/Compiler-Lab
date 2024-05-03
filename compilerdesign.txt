@@ -1,0 +1,453 @@
+Problem Statement: Implement a simple DFA 
+Input: 
+//Simple DFA 
+#include<stdio.h> 
+#include<string.h> 
+#include<stdlib.h> 
+char *s="bbab"; 
+int i=0; 
+void q0(char c); 
+void q1(char c); 
+void q2(char c); 
+void main() 
+{ 
+ q0(s[i++]); 
+} 
+void q0(char c){ 
+ switch(c){ 
+  case 'a': 
+   q1(s[i++]); 
+  case 'b': 
+   q2(s[i++]); 
+  case '\0': 
+   prin ("Empty String\n"); 
+   exit(0); 
+  default: 
+   prin ("Invalid String\n"); 
+   exit(0); 
+ } 
+} 
+void q1(char c){ 
+ switch(c){ 
+  case 'a': 
+   q1(s[i++]); 
+  case 'b': 
+   q1(s[i++]); 
+  case '\0': 
+   prin ("Accepted\n"); 
+   exit(0); 
+  default: 
+   prin ("Invalid String\n"); 
+   exit(0); 
+ } 
+} 
+void q2(char c){ 
+switch(c){ 
+case 'a': 
+q2(s[i++]); 
+case 'b': 
+q2(s[i++]); 
+case '\0': 
+prin ("Rejected\n"); 
+exit(0); 
+default: 
+prin ("Invalid String\n"); 
+exit(0); 
+} 
+
+
+Problem Statement: Implement a C program to remove comments in a file. 
+Input:  
+//Remove Comments 
+#include<stdio.h> 
+#include<string.h> 
+void q0(char c); 
+void q1(char c); 
+void q2(char c); 
+void q3(char c); 
+void q4(char c); 
+FILE *fp; 
+char nextChar(){ 
+ return fgetc(fp); 
+} 
+int main(){ 
+ fp=fopen("h.c","r"); 
+ q0(nextChar()); 
+ return 0; 
+} 
+void q0(char c){ 
+ switch(c){ 
+  case '/': 
+   q1(nextChar()); 
+   break; 
+  case EOF: 
+   break; 
+  default: 
+   prin ("%c",c); 
+   q0(nextChar()); 
+ } 
+} 
+void q1(char c){ 
+ switch(c){ 
+  case '/': 
+   q2(nextChar()); 
+   break; 
+  case '*': 
+   q3(nextChar()); 
+   break; 
+  case EOF: 
+   break; 
+  default: 
+   prin ("%c",c); 
+   q0(nextChar()); 
+ } 
+} 
+void q2(char c){ 
+ switch(c){ 
+  case '\n': 
+   q0(nextChar()); 
+   break; 
+  case EOF: 
+   break; 
+  default: 
+q2(nextChar()); 
+} 
+} 
+void q3(char c){ 
+switch(c){ 
+case '*': 
+q4(nextChar()); 
+break; 
+case EOF: 
+break; 
+default: 
+q3(nextChar()); 
+} 
+} 
+void q4(char c){ 
+switch(c){ 
+case '/': 
+q0(nextChar()); 
+break; 
+case EOF: 
+break; 
+default: 
+prin ("%c",c); 
+q3(nextChar()); 
+} 
+} 
+
+
+Problem Statement: Implement a C program to perform tokeniza on 
+Input: 
+//Tokeniza on 
+#include<stdio.h> 
+#include<string.h> 
+void q0(char c); 
+void q1(char c); 
+void q2(char c); 
+void q3(char c); 
+FILE *fp; 
+char nextChar(){ 
+ return fgetc(fp); 
+} 
+int main(){ 
+ fp=fopen("h.c","r"); 
+ q0(nextChar()); 
+ return 0; 
+} 
+void q0(char c){ 
+ switch(c){ 
+  case ' ': 
+  case '\n': 
+   q0(nextChar()); 
+   break; 
+  case '"': 
+   prin ("%c",c); 
+   q3(nextChar()); 
+   break; 
+  case '#': 
+   q1(nextChar()); 
+   break; 
+  case EOF: 
+   break; 
+  default: 
+   prin ("%c",c); 
+   q2(nextChar()); 
+ } 
+} 
+void q1(char c){ 
+ switch(c){ 
+  case '\n': 
+   q0(nextChar()); 
+   break; 
+  case EOF: 
+   break; 
+  default: 
+   q1(nextChar()); 
+ } 
+} 
+void q2(char c){ 
+ switch(c){ 
+  case ' ': 
+  case '\n': 
+   prin ("\n"); 
+   q0(nextChar()); 
+   break; 
+  case '(': 
+  case '{': 
+  case ')': 
+  case '}': 
+  case ',': 
+  case ';': 
+   prin ("\n%c",c); 
+   q2(nextChar()); 
+   break; 
+  case '"': 
+   prin ("\n%c",c); 
+   q3(nextChar()); 
+   break; 
+  case EOF: 
+   break; 
+  default: 
+   prin ("%c",c); 
+   q2(nextChar()); 
+ } 
+} 
+void q3(char c){ 
+ switch(c){ 
+  case '"': 
+   prin ("%c\n",c); 
+   q0(nextChar()); 
+   break; 
+  case EOF: 
+   break; 
+  default: 
+   prin ("%c",c); 
+   q3(nextChar()); 
+ } 
+}
+
+
+Problem Statement: Implement a C program to validate a password 
+Input:  
+//atleast and atmax one number in a password of length 4 
+#include<stdio.h> 
+#include<string.h> 
+void q0(int); 
+void q1(int); 
+void q2(int); 
+void q3(int); 
+void q4(int); 
+void q5(int); 
+void q6(int); 
+void q7(int); 
+char *str="lab44"; 
+int i=0; 
+int isChar(int ch){ 
+if((ch>=65 && ch<=90) || (ch>=97 && ch<=122)){ 
+return 1; 
+} 
+return 0; 
+} 
+int isNo(int ch){ 
+ if(ch>=48 && ch<=57){ 
+  return 1; 
+ } 
+ return 0; 
+} 
+void main() 
+{ 
+ int i=0; 
+ q0(i); 
+} 
+void q0(int i){ 
+ char c=str[i]; 
+ if(isChar(c)){ 
+  q5(++i); 
+ }else if(isNo(c)){ 
+  q1(++i); 
+ }else{ 
+  prin ("Invalid password"); 
+ } 
+} 
+void q1(int i){ 
+ char c=str[i]; 
+ if(isChar(c)){ 
+  q2(++i); 
+ }else{ 
+  prin ("Invalid password"); 
+ } 
+} 
+void q2(int i){ 
+ char c=str[i]; 
+ if(isChar(c)){ 
+  q3(++i); 
+ }else{ 
+  prin ("Invalid password"); 
+ } 
+} 
+void q3(int i){ 
+ char c=str[i]; 
+ if(isChar(c)){ 
+  q4(++i); 
+ }else{ 
+  prin ("Invalid password"); 
+ } 
+} 
+void q4(int i){ 
+char c=str[i]; 
+if(c=='\0'){ 
+prin ("Correct password\n"); 
+}else{ 
+} 
+} 
+prin ("Invalid password\n"); 
+void q5(int i){ 
+char c=str[i]; 
+if(isChar(c)){ 
+q6(++i); 
+}else if(isNo(c)){ 
+q2(++i); 
+}else{ 
+prin ("Invalid password\n"); 
+} 
+} 
+void q6(int i){ 
+char c=str[i]; 
+if(isChar(c)){ 
+q7(++i); 
+}else if(isNo(c)){ 
+q3(++i); 
+}else{ 
+} 
+} 
+prin ("Invalid password\n"); 
+void q7(int i){ 
+char c=str[i]; 
+if(isNo(c)){ 
+q4(++i); 
+}else{ 
+prin ("Invalid password\n");
+}
+}
+
+
+Problem Statement: Implement a C program to find le recursion, le factoring and remove 
+le factoring, le recursion 
+Input: 
+#include<stdio.h> 
+#include<string.h> 
+char *G[]={"A->Ab","A->a"}; 
+int noOfProd=0; 
+void count(){ 
+while(G[++noOfProd]!='\0'); 
+} 
+void findLe Rec(); 
+void removeLe Rec(); 
+void findLe Fact(); 
+int main(){ 
+count(); 
+f
+ indLe Rec(); 
+removeLe Rec(); 
+f
+ indLe Fact(); 
+return 0; 
+} 
+void findLe Rec(){ 
+int i,j; 
+for(i=0;i<noOfProd;i++){ 
+if(G[i][0]==G[i][3]){ 
+} 
+prin ("Found Le Recursion: %s\n",G[i]); 
+prin ("Not Found Le Recursion: %s\n",G[i]); 
+} 
+} 
+void removeLe Rec() { 
+int i, j; 
+char newNonTerminal[10]; 
+if (G[0][0] == G[0][3]) { 
+        strcpy(newNonTerminal, "A'"); 
+        prin ("Replacing le recursion in %s with %s\n", G[0], newNonTerminal); 
+        prin ("%s -> %c%s\n", newNonTerminal, G[0][3], G[0] + 4); 
+        for (i = 1; i < noOfProd; i++) { 
+            if (G[i][0] == G[0][0]) { 
+                prin ("%s -> %s%s\n", newNonTerminal, G[i] + 3, newNonTerminal); 
+            } else { 
+                prin ("%s\n", G[i]); 
+            } 
+        } 
+    } else { 
+        prin ("No le recursion found.\n"); 
+    } 
+} 
+void findLe Fact(){ 
+ int i,j; 
+ for(i=0;i<noOfProd;i++){ 
+  for(j=i+1;j<noOfProd;j++){ 
+   if(G[i][3]==G[j][3]){ 
+    prin ("Found Le Factoring: %s\n",G[i]); 
+   }  
+  } 
+ } 
+} 
+ 
+
+Problem Statement: Implement a C program to compute first and follow 
+Input: 
+//Compute the first and follow for the following: 
+#include<stdio.h> 
+#include<string.h> 
+int noOfProd=6; 
+int noOfVar=4; 
+char G[6][10]={"S->ZXY","S->XY","X->Xb","X->a","Y->cX","Z->d"}; 
+char F[4][10]={"S","X","Y","Z"}; 
+int isVar(char ch) { 
+    if (ch >= 'A' && ch <= 'Z') 
+        return 1; 
+    return 0; 
+} 
+void add(int var,char ter){ 
+ int i=1; 
+ while(F[var][i]!=ter && F[var][i]!='\0') 
+  i++; 
+ if(F[var][i]=='\0'){ 
+  F[var][i]=ter; 
+  F[var][i+1]='\0'; 
+ } 
+} 
+void Union(int i,char var){ 
+ int j=0,k=1; 
+ while(F[j][0]!=var) 
+  j++; 
+ while(F[j][k]!='\0'){ 
+  add(i,F[j][k]); 
+  k++; 
+ } 
+} 
+int main() { 
+    int i, j; 
+    for (i = 0; i < noOfVar; i++) { 
+        for (j = 0; j < noOfProd; j++) { 
+            if (F[i][0] == G[j][0] && !isVar(G[j][3])) { 
+                add(i, G[j][3]); 
+            } 
+        } 
+    } 
+    for (i = 0; i < noOfVar; i++) { 
+        for (j = 0; j < noOfProd; j++) { 
+            int len = strlen(G[j]); 
+            if (isVar(G[j][len - 1])) { 
+                Union(i, G[j][len - 1]); 
+            } 
+        } 
+    } 
+    for (i = 0; i < noOfVar; i++) { 
+        prin ("%s\n", F[i]); 
+    } 
+    return 0;}
+
+
+
+
